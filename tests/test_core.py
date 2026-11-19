@@ -1,15 +1,9 @@
 """Unit and CLI tests for the Game Dialogue Assistant (Milestones 1-4)."""
-import json
-
 import pytest
 
-from app import cli
 from app.core import (
-    list_characters,
-    load_corpus,
-    milestone_1,
-    preprocess_corpus,
-    tokenize,
+    END_TOKEN, UNK_TOKEN, NGramModel, list_characters, load_corpus,
+    milestone_1, milestone_2, preprocess_corpus, tokenize,
 )
 
 
@@ -55,10 +49,41 @@ def test_preprocess_corpus_filtering_and_errors():
         preprocess_corpus(sample, character="Wizard")
 
 
-
-@pytest.mark.skip(reason="pending milestone 2")
+# Milestone 2: Build the n-gram language model with smoothing.
 def test_milestone_2():
-    raise NotImplementedError()
+    corpus = [
+        ["halt", "traveler", "state", "your", "business"],
+        ["halt", "traveler", "show", "your", "papers"],
+        ["stay", "alert", "near", "the", "gate"],
+    ]
+    model = milestone_2(sentences=corpus, n=2, smoothing=1.0)
+    assert model.n == 2
+    assert UNK_TOKEN in model.vocab
+    assert END_TOKEN in model.vocab
+
+    dist = model.probabilities(["halt"])
+    assert pytest.approx(sum(dist.values()), rel=1e-9) == 1.0
+    assert dist["traveler"] > dist["alert"]
+
+    # Unseen word in unseen context still receives strictly positive Laplace probability
+    unseen_prob = model.probability("dragon", ["unseen"])
+    expected_unseen = 1.0 / (0 + 1.0 * len(model.vocab))
+    assert pytest.approx(unseen_prob, rel=1e-9) == expected_unseen
+
+    # Perplexity remains finite even on unseen sentences thanks to smoothing
+    ppl = model.perplexity([["dragon", "flies", "over", "gate"]])
+    assert ppl > 1.0
+
+
+def test_ngram_model_validation():
+    with pytest.raises(ValueError):
+        NGramModel(n=0)
+    with pytest.raises(ValueError):
+        NGramModel(n=2, smoothing=0.0)
+    with pytest.raises(ValueError):
+        NGramModel(n=2, smoothing=1.0).fit([])
+
+
 
 @pytest.mark.skip(reason="pending milestone 3")
 def test_milestone_3():
