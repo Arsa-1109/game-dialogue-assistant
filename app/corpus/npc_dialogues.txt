@@ -1,0 +1,307 @@
+Guard: Halt, traveler, and state your business before entering the citadel gates.
+Guard: Halt, traveler, for bandits have been spotted near the old ruins.
+Guard: Halt, traveler, and show your travel papers at the northern checkpoint.
+Guard: Halt, traveler, no weapons may remain drawn inside the outer courtyard.
+Guard: Halt, traveler, the watch captain wants a word with anyone arriving from the coast.
+Guard: Halt, traveler, leave your saddlebags open for a quick customs check.
+Guard: Keep your weapons sheathed while inside the city walls.
+Guard: Keep your torch lit if you plan to cross the haunted marsh.
+Guard: Keep your eyes open along the eastern wall tonight.
+Guard: Keep your voice low when passing the royal barracks after curfew.
+Guard: Keep your cloak fastened against the freezing wind from the ridge.
+Guard: State your name and your purpose at the northern watchtower.
+Guard: State your name clearly so the gate clerk can mark the ledger.
+Guard: The road beyond the bridge is dangerous after dusk, traveler.
+Guard: The king's road is patrolled until midnight, yet shadows still gather in the pine woods.
+Guard: Stay alert, for raiders approach the valley whenever the watchtower bells ring.
+Guard: Stay alert near the western postern, where smugglers tried to slip through last week.
+Guard: Stay alert if you hear hooves along the river road before dawn.
+Guard: Move along, citizen, there is nothing to see near the barracks.
+Guard: Move along quietly and let the night watch finish its rounds.
+Guard: The captain ordered double patrols along the king's road tonight.
+Guard: If you seek shelter, the Golden Griffin tavern lies down the main street.
+Guard: If you seek a warm bed, ask the innkeeper at the Golden Griffin for a room.
+Guard: If you spot goblin scouts near the bridge, report to the northern checkpoint at once.
+Guard: If you need healing supplies, visit the merchant stall in the market square.
+Guard: No one passes the inner gate without a royal seal from the council.
+Guard: No one passes after the bell tolls unless they carry an urgent dispatch.
+Guard: Watch your step near the docks, for the mist hides many smugglers.
+Guard: Watch your step along the stone battlements after a heavy rain.
+Guard: We guard the gates from dawn until the stars fade from the sky.
+Guard: We guard the gates against bandits, deserters, and creatures from the marsh.
+Guard: I heard strange howling from the dark forest before midnight.
+Guard: I heard the watch captain say the eastern pass was sealed by rockfall.
+Guard: Report any suspicious strangers to the watch captain at once.
+Guard: The king's banner flies high above the citadel keep today.
+Guard: Stand down, adventurer, and lower your blade before speaking to the watch.
+Guard: Travel safely along the king's road and beware the mountain pass.
+Guard: Travel safely beyond the gates, for wolves have grown bold this winter.
+Guard: Only trusted messengers may enter the throne room after sunset.
+Guard: Check your pack at the gate if you carry alchemical supplies.
+Guard: Rumors say goblins have claimed the abandoned silver mine.
+Guard: Rumors say a hooded scout was seen near the old ruins at dusk.
+Guard: Stay inside your quarters if the storm sirens sound tonight.
+Guard: Every blade in the garrison is sharpened for the coming siege.
+Guard: You look weary from the road, traveler, yet the city welcomes honest folk.
+Guard: You look weary from the march, so rest at the Golden Griffin before heading north.
+Guard: Near the old ruins, the garrison lost two signal beacons during the storm.
+Guard: Near the northern checkpoint, merchants pay a modest road toll at sunrise.
+Guard: A guard never sleeps while the watchtower brazier burns low.
+Guard: Show your travel papers at the gate and keep moving toward the plaza.
+Guard: Those who break the king's peace spend the night in the stone cells.
+Guard: Follow the lantern posts straight down the avenue to reach the market square.
+Guard: Have you seen any stray wagons along the southern road today?
+Guard: Ask the quartermaster if you want a spare shield before joining the patrol.
+Guard: Before entering the citadel gates, sheath every dagger and remove your helm.
+Guard: Patrols change at dawn, when the bell rings from the citadel keep.
+Guard: Bandits have been raiding supply carts between the bridge and the valley.
+Guard: Do not linger near the armory unless you hold a signed warrant.
+Guard: Our spears are ready if raiders test the eastern wall before sunrise.
+Guard: Keep moving, traveler, and stay clear of the prisoner wagon.
+Guard: When the watchtower bells ring twice, every gatehouse drops its iron portcullis.
+Guard: An honest traveler has nothing to fear from a routine lantern check.
+Guard: Trust the stone walls of the citadel keep to hold through any winter storm.
+Guard: Return before curfew if you intend to sleep inside the city walls.
+Guard: Tell the watch captain if any brigand blocks the northern road again.
+Merchant: Welcome, friend, to the finest stall in the bustling market square.
+Merchant: Welcome, friend, and inspect my wares from the southern spice ports.
+Merchant: Welcome, friend, looking for healing potions or enchanted trinkets today?
+Merchant: Welcome, friend, take a look at these finely balanced blades and travel packs.
+Merchant: Welcome, friend, I just unpacked fresh rations and lantern oil from the coast.
+Merchant: Finer potions and silver charms you will not find anywhere else.
+Merchant: Step right up and browse rare herbs, healing draughts, and lantern oil.
+Merchant: Step right up if you want sturdy boots, sharp arrows, or warm wool cloaks.
+Merchant: I trade in rare scrolls, crystal vials, and charms against dark magic.
+Merchant: I trade in dwarven steel, dried spices, and finely woven ropes for climbers.
+Merchant: Looking for supplies before you venture into the dark forest?
+Merchant: Looking for potions, lockpicks, or a dry bedroll for the mountain pass?
+Merchant: Looking for a room? I only sell supplies, so try the Golden Griffin down the street.
+Merchant: Asking for a room at my stall? Check with the innkeeper across the square!
+Merchant: My prices are fair, though enchanted goods never come cheap, adventurer.
+Merchant: My prices are lower than any shop between the harbor and the citadel gates.
+Merchant: My prices stay honest even when bandits disrupt the trade caravans.
+Merchant: Take a healing potion before you challenge the beast in the sunken temple.
+Merchant: Take a bundle of torches if you plan to explore the abandoned silver mine.
+Merchant: Gold speaks louder than promises in the bustling market square.
+Guard: Even gold cannot buy passage through the inner gate without a royal seal.
+Merchant: Gold buys sharp steel, strong potions, and quiet favors along the coast.
+Merchant: Fresh bread, salted rations, and sturdy boots are stocked for long journeys.
+Merchant: Bring me ancient relics from the old ruins and I will pay handsomely.
+Merchant: Bring me pristine monster pelts and I will trade them for rare scrolls.
+Merchant: Every adventurer needs sturdy boots and a reliable compass on the open road.
+Merchant: I bought this gilded amulet from a wandering mage near the coast.
+Merchant: Need arrows, firebombs, or a map of the hidden mountain caves?
+Merchant: Need spare rope, healing salves, or a compass before leaving town?
+Merchant: Business has been slow since bandits blocked the southern trade route.
+Merchant: Tell the blacksmith I sent you if you want a fair price on dwarven steel.
+Merchant: Tell the innkeeper I sent you if you want a warm meal and a quiet room.
+Merchant: Welcome back, traveler, did that last elixir serve you well in battle?
+Merchant: Welcome back, traveler, I saved two crystal vials and extra rations for you.
+Merchant: Stock up on antidotes before exploring the toxic swamps to the east.
+Merchant: A clever merchant always knows which rumors bring the highest profit.
+Merchant: Browse as long as you like, friend, and let me know what catches your eye.
+Merchant: Browse the counter at your leisure, and tell me what gear your party lacks.
+Merchant: Trade caravans arrive at dawn if the weather holds along the coast.
+Merchant: Trade caravans bring silk, spiced tea, and rare ink from the southern ports.
+Merchant: This enchanted lantern burns blue whenever hidden doors are nearby.
+Merchant: This silver compass points true even inside mist and dark magic.
+Merchant: Don't forget extra rope and torches before descending into the deep caverns.
+Merchant: May fortune favor your pouch and your blade on the open road.
+Merchant: On the open road, good boots and dry tinder matter more than fancy jewelry.
+Merchant: If you need lodgings tonight, I do not rent rooms, though the innkeeper has beds open.
+Merchant: If you need healing draughts in bulk, I offer a discount for coin upfront.
+Merchant: Rare herbs grow near the misty river, yet few gatherers return unharmed.
+Merchant: Coin talks here, friend, and my scales never cheat an honest buyer.
+Merchant: Inspect my wares carefully, for every vial was sealed by an academy alchemist.
+Merchant: Buy three healing potions today and I will throw in a spare oil flask.
+Merchant: Before you venture into the deep caverns, pack two antidotes and sturdy twine.
+Merchant: Even seasoned mercenaries stop by my counter for dry rations and arrows.
+Merchant: From the southern spice ports to the northern ridge, everyone knows my banner.
+Merchant: Keep your coin pouch tight in the bustling market square after sunset.
+Merchant: Should you recover any gilded trinkets from the sunken temple, bring them straight to me.
+Merchant: A reliable compass saves lives when fog swallows the mountain pass.
+Merchant: Let me wrap those crystal vials in velvet so they survive your ride.
+Merchant: I pay top coin for goblin iron, ancient coins, and unbroken runes.
+Merchant: Spend your gold wisely, traveler, for winter prices rise every week.
+Merchant: Step closer, friend, and smell these dried herbs straight from the valley orchards.
+Merchant: Nothing leaves my stall without a guarantee of true craftsmanship and pure brew.
+Merchant: Ask around the square and every guard will tell you my tonics work wonders.
+Merchant: I keep no spare beds here, friend, only packs, potions, and sturdy lanterns.
+Mage: The arcane winds shift tonight, and ancient runes glow beneath the tower.
+Mage: The arcane winds carry whispers from the shattered obelisk in the valley.
+Mage: The arcane winds grow restless whenever the twin moons align above the spire.
+Mage: The arcane winds stir the dust inside the library of the silver spire.
+Mage: The arcane winds bring faint echoes of forgotten spells across the courtyard.
+Mage: Seek knowledge carefully, apprentice, for forbidden magic demands a heavy price.
+Mage: Seek knowledge not for vanity, but to shield the realm from approaching darkness.
+Mage: I sense a faint ripple in the astral veil around that ancient relic.
+Mage: I sense old enchantments waking beneath the foundations of the academy.
+Mage: Study the starlight charts before attempting any summoning ritual tonight.
+Mage: Study the elder tome until every glyph flows cleanly from memory.
+Mage: True wisdom lies not in raw power, but in the patience to understand it.
+Mage: The library of the silver spire holds secrets older than the kingdom itself.
+Mage: Do not touch the crystal orb unless your mind is calm and focused.
+Mage: Do not touch the rune circle while the blue candles are still burning.
+Mage: Mana flows through every living stone within the ancient sanctuary.
+Mage: Mana responds to quiet breath, steady will, and clear intent.
+Mage: A ward of frost will shield you from the dragon's fiery breath.
+Mage: A ward of light will scatter the shadows clinging to the haunted marsh.
+Mage: Bring me three moonlit petals and I shall brew a potion of clarity.
+Mage: Bring me powdered silver and I shall inscribe a protective sigil on your cloak.
+Mage: The ancient prophecies warned that the shadow gate would open once more.
+Mage: Magic bends to discipline, never to reckless anger or pride.
+Mage: Read the elder tome slowly, for every syllable carries hidden power.
+Mage: Beware the illusions lurking inside the mirrored halls of the silver spire.
+Mage: Beware the whispered promises of spirits bound inside cracked relics.
+Mage: Your aura burns bright, traveler, as though destiny has marked your path.
+Mage: Time and space weave strange patterns near the shattered obelisk.
+Mage: Only a pure heart can unlock the sealed vault beneath the academy.
+Mage: Only a calm spirit can weave two elemental wards at once.
+Mage: Keep this arcane talisman close when you cross the cursed bridge.
+Mage: Even the wisest archmage still questions the mysteries of the cosmos.
+Mage: Light a blue candle and whisper the old words to reveal the secret ink.
+Mage: I have spent forty winters deciphering the runes of the first age.
+Mage: Rest by the hearth, apprentice, and let your spirit recover its strength.
+Mage: Knowledge shared freely grows stronger, while hoarded secrets rot in the dark.
+Mage: Ancient runes beneath the academy pulse brighter whenever storms roll in from the sea.
+Mage: Beneath the silver spire, the vault doors respond only to spoken starlight verses.
+Mage: When you cast a ward, anchor the center glyph before weaving the outer ring.
+Mage: When you inspect a relic, watch for hair-thin fractures in its crystal core.
+Mage: No apprentice enters the upper observatory without mastering the three basic wards.
+Mage: Look closely at the constellations tonight, for the twin moons trace a rare omen.
+Mage: Every spell leaves an echo in the astral veil for those trained to listen.
+Mage: Pour the moonlit petals into simmering spring water just before midnight.
+Mage: A steady mind keeps raw mana from tearing through fragile parchment scrolls.
+Mage: Should the shadow gate tremble again, summon the council to the silver spire.
+Mage: Do not mistake flash and sparks for genuine mastery of the arcane arts.
+Mage: In the shattered obelisk, inscriptions from three forgotten kingdoms overlap.
+Mage: Let silence guide your focus before drawing a single rune in chalk.
+Mage: Hold the crystal orb aloft and speak the true name of the dawn.
+Mage: Few travelers survive the cursed bridge without an enchanted talisman.
+Mage: My robes smell of cedar smoke, ink, and lingering ozone after each ritual.
+Mage: Take this sealed scroll to the archmage at the silver spire before noon.
+Mage: Careful scholars verify every translation twice before speaking an old incantation.
+Mage: Discipline turns fleeting sparks into enduring wards against the dark.
+Mage: Watch how the starlight bends around the spire's silver pinnacle.
+Mage: Never bargain with echoes trapped inside obsidian mirrors.
+Mage: Speak plainly, traveler, for my wards detect falsehoods within three heartbeats.
+Mage: Gather fallen starstone shards near the crater if you wish to craft a staff.
+Mage: Magic rewards patience, humility, and relentless curiosity.
+Blacksmith: Step near the forge, traveler, and let me inspect that notched blade.
+Blacksmith: Step near the forge and feel the heat of clean dwarven coal.
+Blacksmith: Good steel sings when it strikes the anvil with steady rhythm.
+Blacksmith: Good steel bends and endures while cheap iron shatters against stone.
+Blacksmith: Good steel needs proper oil after rain, or rust will claim its edge.
+Blacksmith: Good steel takes patient folding, bright embers, and an unhurried hammer.
+Blacksmith: Good steel holds a keen edge through a hundred skirmishes in the pass.
+Blacksmith: I can temper your sword with dwarven iron if you bring the ore.
+Blacksmith: I can reinforce your shield rim with brass rivets before dusk.
+Blacksmith: A dull axe will fail you faster than a coward in the heat of battle.
+Blacksmith: Hand over your battered shield and I will hammer out those dents by dusk.
+Blacksmith: The furnace burns hottest at midday when the bellows roar like thunder.
+Blacksmith: Finer armor you will not find between the mountains and the sea.
+Blacksmith: That spear shaft is cracked, friend, so let me fit a fresh ash handle.
+Blacksmith: I forged the captain's breastplate from folded steel and patient sweat.
+Blacksmith: Never swing an untested sword into a dragon's hide, adventurer.
+Blacksmith: Bring me shadowsteel ingots from the deep mines and watch me work wonders.
+Blacksmith: Bring me bog iron and charcoal, and I will craft arrowheads by sunrise.
+Blacksmith: A balanced hilt matters just as much as a razor edge in combat.
+Blacksmith: Sparks fly high whenever a master smith shapes a warhammer.
+Blacksmith: Need silver arrowheads for hunting beasts under the full moon?
+Blacksmith: Need heavy gauntlets or a mended chainmail shirt for the mountain pass?
+Blacksmith: My father taught me to listen to the glow of hot iron before striking.
+Blacksmith: Leave your heavy armor here overnight and collect it polished at sunrise.
+Blacksmith: Strong boots and riveted gauntlets save more lives than flashy cloaks.
+Blacksmith: If you survive the northern pass, come back and tell me how that edge held up.
+Blacksmith: If you want dwarven steel, expect to pay for honest craft and true ore.
+Blacksmith: The anvil remembers every hammer blow and every oath sworn beside the fire.
+Blacksmith: Stand clear of the quenching trough when I plunge red iron into oil.
+Blacksmith: You carry a blade of old elven make, though its edge needs careful honing.
+Blacksmith: Quality craftsmanship takes time, so do not rush the forge.
+Blacksmith: Take this whetstone along on your journey and keep your steel keen.
+Blacksmith: At sunrise, I rake fresh embers and inspect every quenched blade for cracks.
+Blacksmith: Before sunset, every knight's spur and harness buckle will be ready to ride.
+Blacksmith: Cheap iron snaps the moment frost settles over the eastern border.
+Blacksmith: Hammer with steady rhythm, cool the edge evenly, and test the balance twice.
+Blacksmith: A proper fuller lightens a broadsword without weakening the spine.
+Blacksmith: Keep oil on your scabbard lining so mist from the docks never pits your blade.
+Blacksmith: Even a royal guard respects a sturdy iron buckler in a narrow alley.
+Blacksmith: Folded steel patterns gleam like water once the final polish sets.
+Blacksmith: Don't drop a hot chisel near the coal bin unless you want trouble.
+Blacksmith: My apprentice pumps the bellows while I draw out the tang over the horn.
+Blacksmith: Tell the merchant his last shipment of copper rivets held true under stress.
+Blacksmith: Every scratch on a veteran's breastplate tells a story worth remembering.
+Blacksmith: Give me three hours with a whetstone and that halberd will gleam like new.
+Blacksmith: Hardened boots need iron toe caps when marching through goblin caves.
+Blacksmith: Watch the color of glowing steel shift from cherry red to straw gold.
+Blacksmith: No warrior enters the sunken temple with loose rivets on my watch.
+Blacksmith: Set your battered helm on the bench and grab a mug of water while you wait.
+Blacksmith: Heavy plate slows the careless, yet saves those who train in it daily.
+Blacksmith: A smith's pride rests on blades that return intact from impossible fights.
+Blacksmith: Bring me broken armor plates and I will melt them down into solid hinges.
+Blacksmith: When the hammer rings clear, you know the weld took cleanly.
+Blacksmith: Keep your fingers clear of the tongs while turning glowing bars.
+Blacksmith: Forged iron endures centuries longer than whispered boasts in a tavern.
+Blacksmith: Step back from the sparks, traveler, while I draw this spearhead fine.
+Blacksmith: True balance sits two fingers above the crossguard on a knight's longsword.
+Blacksmith: Oil, coal, and patience keep this forge alive through every season.
+Innkeeper: Come in from the cold, traveler, and warm your boots beside the hearth!
+Innkeeper: Come in from the cold, friend, for spiced ale and hot stew await inside.
+Innkeeper: Come in from the cold and take a corner table near the crackling fire.
+Innkeeper: Come in from the cold, wipe the snow off your boots, and grab a warm loaf.
+Innkeeper: A hot bowl of stew and a mug of spiced ale will cure any road weariness.
+Innkeeper: A mug of spiced ale costs two copper coins, and a warm meal costs four.
+Innkeeper: Rooms upstairs are clean, quiet, and safe from the howling wind outside.
+Innkeeper: Rooms cost five silver pieces a night, with fresh linen and breakfast included.
+Innkeeper: For a room tonight, pay five silver upfront and take the brass key from the rack.
+Innkeeper: For a room upstairs, it is five silver for a single bed or eight for a suite.
+Innkeeper: A room on the second floor overlooks the square and stays quiet until sunrise.
+Innkeeper: A room by the hearth costs four silver if you only need shelter until dawn.
+Innkeeper: Pull up a chair near the fire and tell us tales from the eastern border.
+Innkeeper: Pull up a chair and warm your hands while I ladle fresh venison stew.
+Innkeeper: Travelers from every corner of the realm swap rumors at the Golden Griffin.
+Innkeeper: Have you heard the bard sing about the lost crown of the valley?
+Innkeeper: Have you heard the patrol reports about raiders near the northern bridge?
+Innkeeper: Stay the night, friend, for the mountain road is treacherous in the fog.
+Innkeeper: Stay the night at the Golden Griffin and ride out rested at sunrise.
+Innkeeper: Freshly baked loaves and roasted venison just came out of the kitchen.
+Innkeeper: Keep your voice low near the corner booth if you value your quiet evening.
+Innkeeper: The merchant caravan arrived soaked from the storm an hour ago.
+Innkeeper: No brawling inside my tavern, or the city watch will escort you out!
+Innkeeper: Leave your muddy cloak by the door and take the table near the lantern.
+Innkeeper: A good night's rest prepares the mind better than any reckless march.
+Innkeeper: Folks say strange lights flicker above the sunken ruins after midnight.
+Innkeeper: Folks say an old map of the silver mines hangs hidden inside the mayor's hall.
+Innkeeper: Coin upfront for a private room, and breakfast is served at sunrise.
+Innkeeper: Coin upfront gets you a clean room, a hot bath, and stabling for one horse.
+Innkeeper: My cellar holds vintage cider from the southern orchards before the war.
+Innkeeper: You look tired, traveler, so sit down and let me pour you something warm.
+Innkeeper: You look half frozen, friend, so sit by the hearth and dry your wool cloak.
+Innkeeper: Even heroes need a warm meal and a sturdy roof over their heads.
+Innkeeper: That hooded stranger in the back has been asking about the old mines all day.
+Innkeeper: Mind the step by the cellar stairs when carrying your lantern upstairs.
+Innkeeper: May your travels be swift and your return to the tavern always joyful!
+Innkeeper: Another round for the guards coming off night watch at the gate!
+Innkeeper: You'll find plenty of work posted on the notice board beside the chimney.
+Innkeeper: Welcome to the Golden Griffin, where weary travelers find warmth and news.
+Innkeeper: Welcome to the Golden Griffin, friend, grab any open bench near the fire.
+Innkeeper: Warm soup, fresh cheese, and spiced cider are ready for late arrivals.
+Innkeeper: My cheapest room at the end of the hall runs four silver coins until morning.
+Innkeeper: If you want a quiet room away from the bard's lute, ask for number six.
+Innkeeper: Breakfast is served at sunrise with toasted bread, salted bacon, and hot tea.
+Innkeeper: Leave your wet boots beside the hearth and they will be dry before dawn.
+Innkeeper: Three caravans booked beds earlier, yet I still have two rooms free upstairs.
+Innkeeper: Tell me how many nights you need a room, and I will set aside clean blankets.
+Innkeeper: The stable boy will brush down your horse while I heat a pot of broth.
+Innkeeper: Our cider barrels come straight from the southern orchards every autumn.
+Innkeeper: Never trust rumors spoken after midnight over a third mug of strong ale.
+Innkeeper: Check the notice board by the door if your coin pouch needs honest work.
+Innkeeper: Pay at the bar for stew, or drop five silver on the counter for a private room.
+Innkeeper: When storms rattle the shutters, there is no finer refuge than the Golden Griffin.
+Innkeeper: Sit down, friend, rest your pack, and let the warmth of the hearth thaw your bones.
+Innkeeper: Keep the brass room key safe, because the night watch locks the front latch at two.
+Innkeeper: If you ride at dawn, ask the kitchen early for a pack of salted travel rations.
+Innkeeper: Even the city guards slip in after shift for a bowl of hot mutton stew.
+Innkeeper: Every traveler deserves dry sheets, warm firelight, and honest company after dusk.
+Innkeeper: Good ale flows freely here, provided nobody swings a tankard at my mirrors.
+Innkeeper: Ask for anything on the menu, or take the stairs up to room four once you settle up.
