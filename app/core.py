@@ -632,3 +632,64 @@ def milestone_4(
     }
 
 
+def evaluate_models(
+    corpus_path: str | Path | None = None,
+    character: str | None = None,
+    orders: tuple[int, ...] = (1, 2, 3),
+    smoothing: float = 0.05,
+    test_ratio: float = 0.2,
+    seed: int = 42,
+) -> dict:
+    """Evaluate n-gram models against a unigram baseline on a deterministic held-out split."""
+    sentences = load_corpus(corpus_path=corpus_path, character=character)
+    if len(sentences) < 5:
+        raise ValueError("Need at least 5 sentences to run a train/test evaluation split.")
+
+    shuffled = list(sentences)
+    random.Random(seed).shuffle(shuffled)
+    split_idx = max(1, min(len(shuffled) - 1, int(len(shuffled) * (1.0 - test_ratio))))
+    train_sents = shuffled[:split_idx]
+    test_sents = shuffled[split_idx:]
+
+    train_vocab = {tok for s in train_sents for tok in s}
+    test_tokens = [tok for s in test_sents for tok in s]
+    oov_tokens = sum(1 for tok in test_tokens if tok not in train_vocab)
+    oov_rate = (oov_tokens / len(test_tokens)) if test_tokens else 0.0
+
+    rows: list[dict] = []
+    for order in orders:
+        model = NGramModel(n=order, smoothing=smoothing).fit(train_sents)
+        train_ppl = model.perplexity(train_sents)
+        test_ppl = model.perplexity(test_sents)
+
+        matched_events = 0
+        total_events = 0
+        pad_len = order - 1
+        for sent in test_sents:
+            padded = ([START_TOKEN] * pad_len) + sent + [END_TOKEN]
+            for idx in range(pad_len, len(padded)):
+                ctx = tuple(padded[idx - pad_len : idx])
+                if order == 1 or model._ngram_counts[order].get(ctx):
+                    matched_events += 1
+                total_events += 1
+
+        context_coverage = (matched_events / total_events) if total_events else 0.0
+        rows.append(
+            {
+                "order": order,
+                "label": "Unigram baseline" if order == 1 else f"{order}-gram",
+                "train_perplexity": round(train_ppl, 2),
+                "test_perplexity": round(test_ppl, 2),
+                "context_coverage": round(context_coverage, 4),
+            }
+        )
+
+    return {
+        "character": character or "all",
+        "smoothing": smoothing,
+        "train_sentences": len(train_sents),
+        "test_sentences": len(test_sents),
+        "train_vocab": len(train_vocab),
+        "oov_rate": round(oov_rate, 4),
+        "results": rows,
+    }

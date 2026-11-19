@@ -8,6 +8,7 @@ from pathlib import Path
 from app.core import (
     DEFAULT_CORPUS_PATH,
     NGramModel,
+    evaluate_models,
     list_characters,
     load_corpus,
     milestone_4,
@@ -242,6 +243,11 @@ def build_parser() -> argparse.ArgumentParser:
     stats.add_argument("-k", "--smoothing", type=float, default=1.0, help="add-k smoothing constant (default: 1.0)")
     stats.add_argument("--corpus", default=None, help="path to custom script corpus")
 
+    ev = sub.add_parser("eval", help="compare n-gram models against the unigram baseline on a held-out split")
+    ev.add_argument("-c", "--character", default=None, help="filter evaluation to a specific NPC character")
+    ev.add_argument("-k", "--smoothing", type=float, default=0.05, help="add-k smoothing constant (default: 0.05)")
+    ev.add_argument("--corpus", default=None, help="path to custom script corpus")
+
     sub.add_parser("history", help="show previously stored dialogue generations")
 
     return parser
@@ -292,6 +298,25 @@ def main(argv: list[str] | None = None) -> None:
             print(f"Filter: {args.character or 'all'}")
             print(f"Sentences: {model.sentence_count} | Tokens: {model.token_count} | Vocab: {len(model.vocab)}")
             print(f"Model: {args.n}-gram (smoothing k={args.smoothing}) | Training Perplexity: {ppl:.2f}")
+            return
+
+        if args.command == "eval":
+            report = evaluate_models(
+                corpus_path=args.corpus,
+                character=args.character,
+                smoothing=args.smoothing,
+            )
+            print(
+                f"Evaluation (character={report['character']}, smoothing k={report['smoothing']}, "
+                f"split={report['train_sentences']}/{report['test_sentences']} train/test sentences, "
+                f"OOV rate={report['oov_rate']:.1%})"
+            )
+            for row in report["results"]:
+                print(
+                    f"  {row['label']:<17} | Train PPL: {row['train_perplexity']:>7.2f} | "
+                    f"Held-out PPL: {row['test_perplexity']:>7.2f} | "
+                    f"Context Hit: {row['context_coverage']:.1%}"
+                )
             return
 
         if args.command == "history":

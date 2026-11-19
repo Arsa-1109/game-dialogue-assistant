@@ -288,3 +288,16 @@ def test_question_punctuation_distinct_options_and_no_dangling_stopwords():
             assert last_word not in dangling, f"Dangling ending in: {line}"
 
 
+def test_evaluate_models_and_cli_eval(capsys):
+    report = evaluate_models(smoothing=0.05, seed=42)
+    assert report["train_sentences"] > report["test_sentences"] > 0
+    assert [row["order"] for row in report["results"]] == [1, 2, 3]
+    unigram, bigram, trigram = report["results"]
+    assert bigram["train_perplexity"] < unigram["train_perplexity"]
+    assert trigram["train_perplexity"] < bigram["train_perplexity"]
+
+    cli.main(["eval", "--smoothing", "0.05"])
+    out = capsys.readouterr().out
+    assert "Unigram baseline" in out
+    assert "3-gram" in out
+    assert "Held-out PPL" in out
