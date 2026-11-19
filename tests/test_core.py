@@ -1,9 +1,12 @@
 """Unit and CLI tests for the Game Dialogue Assistant (Milestones 1-4)."""
+import json
+
 import pytest
 
 from app.core import (
-    END_TOKEN, UNK_TOKEN, NGramModel, list_characters, load_corpus,
-    milestone_1, milestone_2, preprocess_corpus, tokenize,
+    END_TOKEN, UNK_TOKEN, NGramModel, detokenize, generate_dialogue,
+    generate_options, list_characters, load_corpus, milestone_1,
+    milestone_2, milestone_3, preprocess_corpus, save_dialogues, tokenize,
 )
 
 
@@ -84,10 +87,52 @@ def test_ngram_model_validation():
         NGramModel(n=2, smoothing=1.0).fit([])
 
 
-
-@pytest.mark.skip(reason="pending milestone 3")
+# Milestone 3: Implement dialogue generation logic using the model.
 def test_milestone_3():
-    raise NotImplementedError()
+    model = milestone_2(n=3, smoothing=0.5)
+    options = milestone_3(prompt="Halt traveler", length=16, options=3, model=model, seed=10)
+    assert len(options) == 3
+    for snippet in options:
+        assert snippet.lower().startswith("halt traveler")
+        assert snippet.endswith(".")
+        assert len(snippet.split()) <= 16
+
+    # Deterministic with fixed seed
+    again = milestone_3(prompt="Halt traveler", length=16, options=3, model=model, seed=10)
+    assert options == again
+
+
+def test_generation_backoff_and_detokenize():
+    corpus = preprocess_corpus(
+        "Guard: Halt traveler state your business at the gate.\n"
+        "Guard: Watch your step near the old bridge.\n"
+    )
+    model = NGramModel(n=3, smoothing=1.0).fit(corpus)
+    # Prompt has an unseen word; backoff should still produce a valid continuation
+    text = generate_dialogue(model, prompt="strange traveler", length=10, seed=7)
+    assert text.lower().startswith("strange traveler")
+    assert len(text.split()) <= 10
+
+    assert detokenize([["i", "am", "ready"], ["i'm", "here"]]) == "I am ready. I'm here."
+
+
+def test_generate_options_and_save(tmp_path):
+    model = milestone_2(n=3, smoothing=0.5)
+    opts = generate_options(model, prompt="Welcome friend", count=3, length=15, seed=1)
+    assert len(opts) == 3
+
+    txt_path = save_dialogues(tmp_path / "dialogues.txt", "Welcome friend", opts, {"character": "Merchant"})
+    assert txt_path.exists()
+    content = txt_path.read_text(encoding="utf-8")
+    assert "Prompt: Welcome friend" in content
+    assert "1. " in content and "3. " in content
+
+    json_path = save_dialogues(tmp_path / "dialogues.json", "Welcome friend", opts, {"n": 3})
+    data = json.loads(json_path.read_text(encoding="utf-8"))
+    assert data["prompt"] == "Welcome friend"
+    assert len(data["dialogues"]) == 3
+
+
 
 @pytest.mark.skip(reason="pending milestone 4")
 def test_milestone_4():

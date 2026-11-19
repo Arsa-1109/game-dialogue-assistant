@@ -344,10 +344,242 @@ def milestone_2(
     return NGramModel(n=n, smoothing=smoothing).fit(corpus)
 
 
+# --- Milestone 3: Implement dialogue generation logic using the model.
+def _format_word(word: str, is_sentence_start: bool) -> str:
+    if word == "i":
+        return "I"
+    if word.startswith("i'"):
+        return "I" + word[1:]
+    if is_sentence_start and word:
+        return word[0].upper() + word[1:]
+    return word
 
 
-def milestone_3():  # TODO(milestone 3)
-    raise NotImplementedError("TODO(milestone 3)")
+_DANGLING_END_WORDS = {
+    "and", "or", "but", "the", "a", "an", "to", "of", "in", "for", "with",
+    "from", "at", "by", "on", "if", "that", "as", "will", "would", "could",
+    "should", "can", "may", "might", "my", "your", "our", "their", "his",
+    "her", "its", "this", "these", "those", "very", "so", "is", "are",
+    "was", "were", "be", "has", "have", "had", "into", "near", "before",
+    "after", "when", "while", "where", "who", "which", "than",
+}
+
+
+def detokenize(
+    sentences: list[list[str]],
+    terminators: list[str] | None = None,
+) -> str:
+    """Format tokenized sentences into readable NPC dialogue."""
+    formatted_sentences: list[str] = []
+    for idx, sent in enumerate(sentences):
+        if not sent:
+            continue
+        words = [
+            _format_word(tok, is_sentence_start=(word_idx == 0))
+            for word_idx, tok in enumerate(sent)
+        ]
+        term = terminators[idx] if terminators and idx < len(terminators) else "."
+        formatted_sentences.append(" ".join(words) + term)
+    return " ".join(formatted_sentences)
+
+
+def generate_dialogue(
+    model: NGramModel,
+    prompt: str = "",
+    length: int = 18,
+    temperature: float = 0.85,
+    top_k: int = 8,
+    seed: int | None = None,
+) -> str:
+    """Generate a coherent NPC dialogue snippet starting from `prompt`."""
+    if length < 1:
+        raise ValueError("length must be at least 1")
+
+    rng = random.Random(seed)
+    stripped = prompt.strip()
+    prompt_term = stripped[-1] if stripped and stripped[-1] in {".", "?", "!"} else None
+    prompt_tokens = tokenize(prompt)
+
+    if len(prompt_tokens) >= length:
+        return detokenize([prompt_tokens[:length]], [prompt_term or "."])
+
+    sentences: list[list[str]] = []
+    terminators: list[str] = []
+
+    if prompt_term is not None and prompt_tokens:
+        sentences.append(list(prompt_tokens))
+        terminators.append(prompt_term)
+        current_sentence: list[str] = []
+        prompt_sentence_active = False
+    elif len(prompt_tokens) >= 3 and not model.has_context_match(prompt_tokens, require_continuation=True):
+        sentences.append(list(prompt_tokens))
+        terminators.append(".")
+        current_sentence = []
+        prompt_sentence_active = False
+    else:
+        current_sentence = list(prompt_tokens)
+        prompt_sentence_active = bool(prompt_tokens)
+
+    total_words = len(prompt_tokens)
+    min_target = min(length, max(total_words + 4, length // 2, 6))
+    ended_naturally = False
+
+    while total_words < length:
+        if current_sentence:
+            min_sent_len = max(3, len(prompt_tokens) + 1) if prompt_sentence_active else 3
+            allow_end = len(current_sentence) >= min_sent_len
+        else:
+            allow_end = False
+
+        end_boost = 2.5 if (allow_end and total_words >= max(min_target, length - 4)) else 1.0
+
+        exclude_tokens: set[str] = set()
+        if current_sentence:
+            last_tok = current_sentence[-1]
+            exclude_tokens.add(last_tok)
+            for idx in range(len(current_sentence) - 1):
+                if current_sentence[idx] == last_tok:
+                    exclude_tokens.add(current_sentence[idx + 1])
+
+        next_tok = model.predict_next(
+            current_sentence,
+            temperature=temperature,
+            top_k=top_k,
+            rng=rng,
+            allow_end=allow_end,
+            end_boost=end_boost,
+            exclude_tokens=exclude_tokens,
+        )
+        if next_tok == END_TOKEN:
+            if current_sentence:
+                sentences.append(current_sentence)
+                terminators.append(".")
+                current_sentence = []
+                prompt_sentence_active = False
+            if total_words >= min_target:
+                ended_naturally = True
+                break
+            continue
+
+        current_sentence.append(next_tok)
+        total_words += 1
+
+    if current_sentence:
+        if not ended_naturally:
+            min_keep = (len(prompt_tokens) + 1) if prompt_sentence_active else 3
+            while len(current_sentence) > min_keep and current_sentence[-1] in _DANGLING_END_WORDS:
+                current_sentence.pop()
+        sentences.append(current_sentence)
+        terminators.append(".")
+
+    return detokenize(sentences, terminators)
+
+
+def generate_options(
+    model: NGramModel,
+    prompt: str = "",
+    count: int = 3,
+    length: int = 18,
+    temperature: float = 0.9,
+    top_k: int = 8,
+    seed: int | None = None,
+) -> list[str]:
+    """Generate multiple dialogue options for a given starting phrase."""
+    if count < 1:
+        raise ValueError("count must be at least 1")
+
+    results: list[str] = []
+    seen: set[str] = set()
+    max_attempts = count * 10
+
+    for attempt in range(max_attempts):
+        attempt_seed = None if seed is None else seed + attempt * 31
+        retry_round = attempt // count
+        cur_temp = min(1.5, temperature + 0.12 * retry_round)
+        cur_top_k = top_k + 2 * retry_round
+        snippet = generate_dialogue(
+            model,
+            prompt=prompt,
+            length=length,
+            temperature=cur_temp,
+            top_k=cur_top_k,
+            seed=attempt_seed,
+        )
+        if snippet not in seen:
+            seen.add(snippet)
+            results.append(snippet)
+            if len(results) == count:
+                break
+
+    while len(results) < count:
+        attempt_seed = None if seed is None else seed + (max_attempts + len(results)) * 31
+        results.append(
+            generate_dialogue(
+                model,
+                prompt=prompt,
+                length=length,
+                temperature=min(1.5, temperature + 0.3),
+                top_k=top_k + 6,
+                seed=attempt_seed,
+            )
+        )
+
+    return results
+
+
+def milestone_3(
+    prompt: str = "Halt traveler",
+    length: int = 18,
+    options: int = 1,
+    model: NGramModel | None = None,
+    seed: int | None = 42,
+) -> list[str]:
+    """Milestone 3 entrypoint: generate dialogue snippets from a trained model."""
+    active_model = milestone_2() if model is None else model
+    return generate_options(
+        active_model,
+        prompt=prompt,
+        count=options,
+        length=length,
+        seed=seed,
+    )
+
+
+# --- Stretch helper: Save generated dialogues to a file.
+def save_dialogues(
+    output_path: str | Path,
+    prompt: str,
+    dialogues: list[str],
+    metadata: dict | None = None,
+) -> Path:
+    """Save generated dialogue options to a .json or .txt/.md file."""
+    path = Path(output_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    meta = metadata or {}
+
+    if path.suffix.lower() == ".json":
+        payload = {
+            "prompt": prompt,
+            "metadata": meta,
+            "dialogues": dialogues,
+        }
+        path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        return path
+
+    lines = [
+        f"Prompt: {prompt or '(none)'}",
+    ]
+    if meta:
+        meta_parts = [f"{k}={v}" for k, v in meta.items() if v is not None]
+        if meta_parts:
+            lines.append("Settings: " + ", ".join(meta_parts))
+    lines.append("")
+    for idx, option in enumerate(dialogues, start=1):
+        lines.append(f"{idx}. {option}")
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return path
+
+
 
 
 def milestone_4():  # TODO(milestone 4)
