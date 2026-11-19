@@ -580,7 +580,55 @@ def save_dialogues(
     return path
 
 
+# --- Milestone 4: Design a CLI where users can input a starting phrase and generate dialogue.
+def milestone_4(
+    prompt: str = "Halt traveler",
+    length: int = 18,
+    options: int = 3,
+    character: str | None = None,
+    n: int = 3,
+    smoothing: float = 1.0,
+    corpus_path: str | Path | None = None,
+    seed: int | None = None,
+    save_path: str | Path | None = None,
+    temperature: float = 0.9,
+    top_k: int = 8,
+) -> dict:
+    """Milestone 4 entrypoint: end-to-end load, train, generate, and optional save."""
+    sentences = load_corpus(corpus_path=corpus_path, character=character)
+    model = NGramModel(n=n, smoothing=smoothing).fit(sentences)
+    dialogues = generate_options(
+        model,
+        prompt=prompt,
+        count=options,
+        length=length,
+        temperature=temperature,
+        top_k=top_k,
+        seed=seed,
+    )
+    metadata = {
+        "character": character or "all",
+        "n": n,
+        "smoothing": smoothing,
+        "length": length,
+        "vocab_size": len(model.vocab),
+        "sentences": model.sentence_count,
+    }
+    saved_to: str | None = None
+    if save_path is not None:
+        saved_to = str(save_dialogues(save_path, prompt=prompt, dialogues=dialogues, metadata=metadata))
+
+    return {
+        "prompt": prompt,
+        "character": character or "all",
+        "n": n,
+        "smoothing": smoothing,
+        "length": length,
+        "vocab_size": len(model.vocab),
+        "sentence_count": model.sentence_count,
+        "token_count": model.token_count,
+        "dialogues": dialogues,
+        "saved_to": saved_to,
+    }
 
 
-def milestone_4():  # TODO(milestone 4)
-    raise NotImplementedError("TODO(milestone 4)")

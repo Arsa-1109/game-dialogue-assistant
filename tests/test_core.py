@@ -3,10 +3,24 @@ import json
 
 import pytest
 
+from app import cli
 from app.core import (
-    END_TOKEN, UNK_TOKEN, NGramModel, detokenize, generate_dialogue,
-    generate_options, list_characters, load_corpus, milestone_1,
-    milestone_2, milestone_3, preprocess_corpus, save_dialogues, tokenize,
+    END_TOKEN,
+    UNK_TOKEN,
+    NGramModel,
+    detokenize,
+    evaluate_models,
+    generate_dialogue,
+    generate_options,
+    list_characters,
+    load_corpus,
+    milestone_1,
+    milestone_2,
+    milestone_3,
+    milestone_4,
+    preprocess_corpus,
+    save_dialogues,
+    tokenize,
 )
 
 
@@ -133,7 +147,144 @@ def test_generate_options_and_save(tmp_path):
     assert len(data["dialogues"]) == 3
 
 
+# Milestone 4: Design a CLI where users can input a starting phrase and generate dialogue.
+def test_milestone_4(capsys, tmp_path, monkeypatch):
+    save_file = tmp_path / "out.txt"
+    store_file = tmp_path / "store.json"
+    monkeypatch.setenv("DATA_PATH", str(store_file))
 
-@pytest.mark.skip(reason="pending milestone 4")
-def test_milestone_4():
-    raise NotImplementedError()
+    cli.main(
+        [
+            "generate",
+            "--prompt",
+            "Halt traveler",
+            "--character",
+            "Guard",
+            "--length",
+            "15",
+            "--options",
+            "2",
+            "--seed",
+            "42",
+            "--save",
+            str(save_file),
+            "--store",
+        ]
+    )
+    out = capsys.readouterr().out
+    assert "Character: Guard" in out
+    assert "1. Halt traveler" in out
+    assert "2. Halt traveler" in out
+    assert save_file.exists()
+
+    cli.main(["history"])
+    hist_out = capsys.readouterr().out
+    assert "Halt traveler" in hist_out
+
+
+def test_cli_interactive_prompt_and_stats(capsys, monkeypatch):
+    monkeypatch.setattr("builtins.input", lambda _: "Welcome friend")
+    cli.main(["generate", "--character", "Merchant", "--length", "14", "--options", "2", "--seed", "5"])
+    out = capsys.readouterr().out
+    assert "Character: Merchant" in out
+    assert "1. Welcome friend" in out
+
+    cli.main(["stats", "--character", "Mage"])
+    stats_out = capsys.readouterr().out
+    assert "Filter: Mage" in stats_out
+    assert "Training Perplexity:" in stats_out
+
+
+def test_milestone_4_api_and_cli_error():
+    res = milestone_4(prompt="Good steel", character="Blacksmith", length=14, options=2, seed=9)
+    assert res["character"] == "Blacksmith"
+    assert len(res["dialogues"]) == 2
+    assert all(line.lower().startswith("good steel") for line in res["dialogues"])
+
+    with pytest.raises(SystemExit) as exc:
+        cli.main(["generate", "--prompt", "Hello", "--character", "UnknownNPC"])
+    assert exc.value.code == 1
+
+
+def test_interactive_inline_and_angle_bracket_commands(capsys, monkeypatch, tmp_path):
+    save_file = tmp_path / "inline_saved.txt"
+    inputs = iter([
+        f"How much for a room? :char <Merchant> :save {save_file}",
+        ":char Guard",
+        "Halt traveler",
+        ":quit",
+    ])
+    monkeypatch.setattr("builtins.input", lambda _: next(inputs))
+    cli.main(["interactive", "--length", "22", "--options", "2"])
+    out = capsys.readouterr().out
+    assert "Character set to: Merchant" in out
+    assert "Prompt: 'How much for a room?' | Character: Merchant" in out
+    assert "Character set to: Guard" in out
+    assert "Prompt: 'Halt traveler' | Character: Guard" in out
+    assert save_file.exists()
+    saved_text = save_file.read_text(encoding="utf-8")
+    assert "Prompt: How much for a room?" in saved_text
+    assert "character=Merchant" in saved_text
+
+
+def test_question_punctuation_distinct_options_and_no_dangling_stopwords():
+    innkeeper_res = milestone_4(
+        prompt="how much for a room?",
+        character="Innkeeper",
+        length=22,
+        options=3,
+        seed=42,
+    )
+    innkeeper_lines = innkeeper_res["dialogues"]
+    assert len(set(innkeeper_lines)) == 3
+    for line in innkeeper_lines:
+        assert line.startswith("How much for a room?")
+        assert len(line.split()) <= 22
+
+    merchant_q = milestone_4(
+        prompt="how much for a room?",
+        character="Merchant",
+        length=22,
+        options=3,
+        seed=42,
+    )
+    assert len(set(merchant_q["dialogues"])) == 3
+    for line in merchant_q["dialogues"]:
+        assert line.startswith("How much for a room?")
+        assert "room the" not in line.lower()
+
+    merchant_no_q = milestone_4(
+        prompt="how much for a room",
+        character="Merchant",
+        length=22,
+        options=3,
+        seed=42,
+    )
+    for line in merchant_no_q["dialogues"]:
+        assert "room the" not in line.lower()
+
+    # Completely out-of-corpus prompt should close cleanly rather than gluing unigrams
+    oov_res = milestone_4(
+        prompt="where is the spaceship",
+        character="Guard",
+        length=20,
+        options=3,
+        seed=11,
+    )
+    for line in oov_res["dialogues"]:
+        assert line.startswith("Where is the spaceship.")
+
+    dangling = {"and.", "the.", "will.", "for.", "or.", "but.", "to.", "of.", "in."}
+    for prompt_text, npc in [
+        ("Halt traveler", "Guard"),
+        ("Welcome friend", "Merchant"),
+        ("The arcane winds", "Mage"),
+        ("Good steel", "Blacksmith"),
+        ("Come in from the cold", "Innkeeper"),
+    ]:
+        res = milestone_4(prompt=prompt_text, character=npc, length=18, options=3, seed=42)
+        for line in res["dialogues"]:
+            last_word = line.lower().split()[-1]
+            assert last_word not in dangling, f"Dangling ending in: {line}"
+
+
